@@ -181,7 +181,7 @@ Login
     :FOR   ${index}   IN RANGE   ${Items_length}
     \       Додати предмет    ${items[${index}]}          ${index}
     Sleep    1
-    Click Element    id = submissive-btn
+    Click Element    id = Convert To Numbermissive-btn
     Click Element    id =publish-btn
     Sleep    2
     ${tender_id}=    Get Text    id = auction-id
@@ -193,7 +193,7 @@ Login
     [Arguments]    ${item}    ${index}
     Click Element    id = create-item-btn
     Sleep    2
-    ${quantity}=    to_str    ${item.quantity}
+    ${quantity}=    Convert To String    ${item.quantity}
     ${start_date}=    convert_ISO_DMY    ${item.contractPeriod.startDate}
     ${end_date}=    convert_ISO_DMY    ${item.contractPeriod.endDate}
     Input text    id=items-description    ${item.description}
@@ -385,7 +385,7 @@ Login
 
 Отримати інформацію про guarantee.amount
     ${return}=    Get Text    id=auction-guarantee_amount
-    ${return_value}=    to_float    ${return}
+    ${return_value}=    Convert To Number    ${return}
     [Return]    ${return_value}
 
 Отримати інформацію про bid.data.participationUr
@@ -420,9 +420,9 @@ Login
     [Arguments]  ${username}  ${tender_uaid}  ${fieldname}  ${field_value}
     ${testFilePath}=    get_upload_file_path
     tbums.Пошук тендера по ідентифікатору    ${username}  ${tender_uaid}
-    ${fieldvalue}=  Run Keyword If  '${field_name}' == 'value.amount'  get_str  ${fieldvalue}
-    ...  ELSE IF  '${field_name}' == 'minimalStep.amount'  get_str  ${fieldvalue}
-    ...  ELSE IF  '${field_name}' == 'guarantee.amount'  get_str  ${fieldvalue}
+    ${fieldvalue}=  Run Keyword If  '${field_name}' == 'value.amount'  Convert To String  ${fieldvalue}
+    ...  ELSE IF  '${field_name}' == 'minimalStep.amount'  Convert To String  ${fieldvalue}
+    ...  ELSE IF  '${field_name}' == 'guarantee.amount'  Convert To String  ${fieldvalue}
     ...  ELSE  Set Variable  ${fieldvalue}
     Click Element    id = lot-edit-btn
     Input Text    ${locator.edit.${fieldname}}    ${field_value}
@@ -630,7 +630,7 @@ Login
     [Arguments]    ${username}    ${tender_uaid}    ${question_id}    ${field_name}
     tbums.Перейти до сторінки запитань    ${username}    ${tender_uaid}
     Sleep    1
-    ${return_value}=    Run Keyword If    '${field_name}' == 'title'    Отримати інформацію про questions[${index}].title
+    ${return_value}=    Convert To Number Keyword If    '${field_name}' == 'title'    Отримати інформацію про questions[${index}].title
     ...    ELSE IF    '${field_name}' == 'answer'    Отримати інформацію про questions[${index}].answer
     ...    ELSE    Отримати інформацію про questions[${index}].description
     [Return]    ${return_value}
@@ -642,7 +642,7 @@ Login
     Click Element    id = bid-create-btn
     Sleep    2s
     Click Element    id = bids-oferta
-    ${amount}=    to_str    ${bid.data.value.amount}
+    ${amount}=    Convert To String    ${bid.data.value.amount}
     Input Text    id=bids-value_amount    ${amount}
     Sleep    2
     Click Element    id = bid-save-btn
@@ -667,7 +667,7 @@ ConvToStr And Input Text
     Click Element    id=bid-create-btn
     Wait Until Page Contains Element    id=bid-value_amount
     ${value}=    Get Text    id=bid-value_amount
-    ${return}=    to_float    ${value}
+    ${return}=    Convert To Number    ${value}
     [Return]    ${return}
 
 Змінити цінову пропозицію
@@ -679,7 +679,7 @@ ConvToStr And Input Text
     Click Element    id = bid-update-btn
     Sleep    2
     Click Element    id = bids-oferta
-    ${value}=    to_str    ${amount_value}
+    ${value}=    Convert To String    ${amount_value}
     Input Text    id=bids-value_amount    ${value}
     Sleep    2
     Click Element    id = bid-save-btn
