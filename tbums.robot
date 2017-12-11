@@ -181,7 +181,7 @@ Login
     :FOR   ${index}   IN RANGE   ${Items_length}
     \       Додати предмет    ${items[${index}]}          ${index}
     Sleep    1
-    Click Element    id = Convert To Numbermissive-btn
+    Click Element    id = submissive-btn
     Click Element    id =publish-btn
     Sleep    2
     ${tender_id}=    Get Text    id = auction-id
@@ -630,7 +630,7 @@ Login
     [Arguments]    ${username}    ${tender_uaid}    ${question_id}    ${field_name}
     tbums.Перейти до сторінки запитань    ${username}    ${tender_uaid}
     Sleep    1
-    ${return_value}=    Convert To Number Keyword If    '${field_name}' == 'title'    Отримати інформацію про questions[${index}].title
+    ${return_value}=    Run Keyword If    '${field_name}' == 'title'    Отримати інформацію про questions[${index}].title
     ...    ELSE IF    '${field_name}' == 'answer'    Отримати інформацію про questions[${index}].answer
     ...    ELSE    Отримати інформацію про questions[${index}].description
     [Return]    ${return_value}
