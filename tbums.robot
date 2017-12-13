@@ -486,32 +486,30 @@ Login
     [Return]    ${return_value}
 
 Отримати інформацію про auctionPeriod.startDate
-    ${date_value}=    Get Text    auction-auctionPeriod_startDate
+    ${date_value}=    Отримати текст із поля і показати на сторінці    auctionPeriod.startDate
     ${return_value}=    convert_date_to_iso    ${date_value}
     [Return]    ${return_value}
 
 Отримати інформацію про auctionPeriod.endDate
-    ${date_value}=    Get Text    auction-auctionPeriod_endDate
+    ${date_value}=    Отримати текст із поля і показати на сторінці    auctionPeriod.endDate
     ${return_value}=    convert_date_to_iso    ${date_value}
     [Return]    ${return_value}
 
 Отримати інформацію про tenderPeriod.startDate
-    ${date_value}=    Get Text    auction-tenderPeriod_startDate
-    ${return_value}=    convert_date_to_iso    ${date_value}
-    [Return]    ${return_value}
+    ${date_value}=    Отримати текст із поля і показати на сторінці    tenderPeriod.startDate
+    [Return]    {date_value}
 
 Отримати інформацію про tenderPeriod.endDate
-    ${date_value}=    Get Text    id = auction-tenderPeriod_endDate
-    ${return_value}=    convert_date_to_iso    ${date_value}
-    [Return]    ${return_value}
+    ${date_value}=    Отримати текст із поля і показати на сторінці    tenderPeriod.endDate
+    [Return]    {date_value}
 
 Отримати інформацію про enquiryPeriod.startDate
-    ${date_value}=    Get Text    auction-enquiryPeriod_startDate
+    ${date_value}=    Отримати текст із поля і показати на сторінці    enquiryPeriod.startDate
     ${return_value}=    convert_date_to_iso    ${date_value}
     [Return]    ${return_value}
 
 Отримати інформацію про enquiryPeriod.endDate
-    ${date_value}=    Get Text    auction-enquiryPeriod_endDate
+    ${date_value}=    Отримати текст із поля і показати на сторінці    enquiryPeriod.endDate
     ${return_value}=    convert_date_to_iso    ${date_value}
     [Return]    ${return_value}
 
@@ -556,8 +554,8 @@ Login
     ${title}=    Get From Dictionary    ${ARGUMENTS[2].data}    title
     ${description}=    Get From Dictionary    ${ARGUMENTS[2].data}    description
     tbums.Пошук тендера по ідентифікатору    ${ARGUMENTS[0]}    ${ARGUMENTS[1]}
-    Wait Until Page Contains Element    id = tab-2
-    Click Element    id = tab-2
+    Wait Until Page Contains Element    id = tab-selector-2
+    Click Element    id = tab-selector-2
     Wait Until Page Contains Element    id= create-question-btn
     Click Element    id=create-question-btn
     Sleep    1
@@ -570,7 +568,7 @@ Login
   [Arguments]  ${username}  ${tender_uaid}  ${item_id}  ${question}
   tbums.Пошук тендера по ідентифікатору  ${username}  ${tender_uaid}
   Sleep    2
-  Click Element     id = question[${item_id}].item
+  Click Element     id = ${item_id}item
   Sleep  3
   Input text          id=question-title                 ${question.data.title}
   Input text          id=question-description          ${question.data.description}
@@ -641,7 +639,7 @@ Login
     sleep    2
     Click Element    id = bid-create-btn
     Sleep    2s
-    Click Element    id = bids-oferta
+    Run Keyword If    ${bid['data'].qualified} != ${False}    Click Element    id=bids-oferta
     ${amount}=    Convert To String    ${bid.data.value.amount}
     Input Text    id=bids-value_amount    ${amount}
     Sleep    2
