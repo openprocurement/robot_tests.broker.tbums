@@ -377,6 +377,7 @@ Login
 
 Отримати інформацію про tenderAttempts
     ${return_value}=    Get Text    id=auction-tenderAttempts
+    ${return_value}=    Convert To Integer    ${return_value}
     [Return]    ${return_value}
 
 Отримати інформацію про tender.data.auctionUrl
@@ -496,12 +497,14 @@ Login
     [Return]    ${return_value}
 
 Отримати інформацію про tenderPeriod.startDate
-    ${date_value}=    Отримати текст із поля і показати на сторінці    tenderPeriod.startDate
-    [Return]    {date_value}
+    ${date_value}=    Get Text    auction-tenderPeriod_startDate
+    ${return_value}=    convert_date_to_iso    ${date_value}
+    [Return]    ${return_value}
 
 Отримати інформацію про tenderPeriod.endDate
-    ${date_value}=    Отримати текст із поля і показати на сторінці    tenderPeriod.endDate
-    [Return]    {date_value}
+    ${date_value}=    Get Text    id = auction-tenderPeriod_endDate
+    ${return_value}=    convert_date_to_iso    ${date_value}
+    [Return]    ${return_value}
 
 Отримати інформацію про enquiryPeriod.startDate
     ${date_value}=    Отримати текст із поля і показати на сторінці    enquiryPeriod.startDate
