@@ -862,7 +862,7 @@ ConvToStr And Input Text
     Choose File    id = files-file    ${filepath}
     Sleep    1
     Click Element    id = upload-contract-btn
-    Sleep 10
+    Sleep    10
 
 Підтвердити наявність протоколу аукціону
     [Arguments]  ${username}  ${tender_uaid}  ${award_index}
