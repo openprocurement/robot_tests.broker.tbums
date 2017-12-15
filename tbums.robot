@@ -23,6 +23,7 @@ ${locator.value-amount}    id = auction_value_amount
 ${locator.value-valueAddedTaxIncluded}    id=auction-valueAddedTaxIncluded
 ${locator.value.currency}    id=value-currency
 ${locator.auctionPeriod.startDate}    id = auction-auctionPeriod_startDate
+${locator.auctionPeriod.endDate}    id = auction-auctionPeriod_endDate
 ${locator.enquiryPeriod.startDate}    id = auction-enquiryPeriod_startDate
 ${locator.enquiryPeriod.endDate}    id = auction-enquiryPeriod_endDate
 ${locator.tenderPeriod.startDate}    id = auction-tenderPeriod_startDate
